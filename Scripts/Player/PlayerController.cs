@@ -7,18 +7,19 @@ public partial class PlayerController : CharacterBody2D
 
     // movimiento
     [Export] public float speed;
+    private float _backlink = 5f;
 
     // ataque
     [Export] public PackedScene bullet;
     private Marker2D _spawnBullets;
     private Marker2D _spawnBullets2;
     private Marker2D _spawnBullets3;
-    private int _levelAttack = 3;
+    private int _levelAttack = 1;
 
     // metodos
     public override void _Ready()
     {
-        // TODO inicializar variables de maenra mas efectva y limpia
+        // TODO: inicializar variables de manera mas efectva y limpia
         _spawnBullets = GetNode<Marker2D>("Weapons/Marker2D");
         _spawnBullets2 = GetNode<Marker2D>("Weapons/Marker2D2");
         _spawnBullets3 = GetNode<Marker2D>("Weapons/Marker2D3");
@@ -51,19 +52,19 @@ public partial class PlayerController : CharacterBody2D
     {
         if(Position.X < 2)
         {
-            Position = new Vector2(Position.X + 30, Position.Y);
+            Position = new Vector2(Position.X + _backlink, Position.Y);
         }
         else if(Position.X > 478)
         {
-            Position = new Vector2(Position.X - 30, Position.Y);
+            Position = new Vector2(Position.X - _backlink, Position.Y);
         }
         else if(Position.Y < 2)
         {
-            Position = new Vector2(Position.X, Position.Y + 30);
+            Position = new Vector2(Position.X, Position.Y + _backlink);
         }
         else if(Position.Y > 718)
         {
-            Position = new Vector2(Position.X, Position.Y - 30);
+            Position = new Vector2(Position.X, Position.Y - _backlink);
         }
         
     }
@@ -92,7 +93,7 @@ public partial class PlayerController : CharacterBody2D
             GetParent().AddChild(newBullet2);
 
             Area2D newBullet3 = (Area2D)bullet.Instantiate();
-            newBullet2.GlobalPosition = _spawnBullets3.GlobalPosition;
+            newBullet3.GlobalPosition = _spawnBullets3.GlobalPosition;
             GetParent().AddChild(newBullet3);
         }
         if(_levelAttack == 3)
@@ -108,6 +109,36 @@ public partial class PlayerController : CharacterBody2D
             Area2D newBullet3 = (Area2D)bullet.Instantiate();
             newBullet3.GlobalPosition = _spawnBullets3.GlobalPosition;
             GetParent().AddChild(newBullet3);
+        }
+    }
+
+    public void LevelUpAttack()
+    {
+        // subimos de nivel el ataque
+        _levelAttack++;
+        if(_levelAttack > 3)
+        {
+            _levelAttack = 3;
+        }
+        if(_levelAttack == 3)
+        {
+            LevelDownAttack();
+        }
+    }
+
+    public async void LevelDownAttack()
+    {
+        // bajamos de nivel el ataque despues de 30 segundos
+        await ToSignal(GetTree().CreateTimer(30), "timeout");
+        _levelAttack = 2;
+    }
+
+    public void DetectPowerUp(Area2D body)
+    {
+        // al detectar un power up, subimos de nivel el ataque
+        if(body.IsInGroup("PowerUp"))
+        {
+            LevelUpAttack();
         }
     }
 }
