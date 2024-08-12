@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://wwog5s5m2skh"]
+
+[ext_resource type="Texture2D" uid="uid://c7e5w3qn656ti" path="res://Assets/Power Ups/powerup.png" id="1_yqpxv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1biay"]
+size = Vector2(10, 10)
+
+[node name="PowerUp" type="Area2D" groups=["PowerUp"]]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yqpxv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1biay")
