@@ -2,18 +2,24 @@
 
 [ext_resource type="Texture2D" uid="uid://udg5nu6ruiu1" path="res://Assets/Player/airplane.png" id="1_f4kdh"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_om04q"]
-[ext_resource type="PackedScene" uid="uid://dnkxfsgq0cxiy" path="res://Scenes/Characters/Player/bullet_level1.tscn" id="2_0wcaj"]
+[ext_resource type="PackedScene" uid="uid://dnkxfsgq0cxiy" path="res://Scenes/Characters/Player/bullet.tscn" id="2_ea6l6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pear"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14ojk"]
 size = Vector2(22, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pear"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_om04q")
 speed = 250.0
-bullet = ExtResource("2_0wcaj")
+bullet = ExtResource("2_ea6l6")
+
+[node name="DetectElements" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectElements"]
+shape = SubResource("RectangleShape2D_3pear")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -33,12 +39,6 @@ scale = Vector2(1, 1.00287)
 position = Vector2(-10, -3)
 
 [node name="Marker2D3" type="Marker2D" parent="Weapons"]
-position = Vector2(9, -3)
-
-[node name="DetectElements" type="Area2D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectElements"]
-shape = SubResource("RectangleShape2D_3pear")
+position = Vector2(10, -3)
 
 [connection signal="area_entered" from="DetectElements" to="." method="DetectPowerUp"]

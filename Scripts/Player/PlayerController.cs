@@ -16,6 +16,9 @@ public partial class PlayerController : CharacterBody2D
     private Marker2D _spawnBullets3;
     private int _levelAttack = 1;
 
+    // vida
+    public Global global;
+
     // metodos
     public override void _Ready()
     {
@@ -23,6 +26,10 @@ public partial class PlayerController : CharacterBody2D
         _spawnBullets = GetNode<Marker2D>("Weapons/Marker2D");
         _spawnBullets2 = GetNode<Marker2D>("Weapons/Marker2D2");
         _spawnBullets3 = GetNode<Marker2D>("Weapons/Marker2D3");
+
+        global = GetNode<Global>("/root/Global");
+
+        GD.Print(global.life);
 
     }
 
@@ -114,7 +121,7 @@ public partial class PlayerController : CharacterBody2D
 
     public void LevelUpAttack()
     {
-        // subimos de nivel el ataque
+        // modificamos de nivel el ataque
         _levelAttack++;
         if(_levelAttack > 3)
         {
@@ -139,6 +146,19 @@ public partial class PlayerController : CharacterBody2D
         if(body.IsInGroup("PowerUp"))
         {
             LevelUpAttack();
+        }
+    }
+
+    public void DetectDamage(Area2D body)
+    {
+        // al detectar un enemigo o una bala, bajamos la vida
+        if(body.IsInGroup("Enemy") || body.IsInGroup("BulletEnemy"))
+        {
+            global.life--;
+            if(global.life <= 0)
+            {
+                QueueFree();
+            }
         }
     }
 }

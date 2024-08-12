@@ -9,4 +9,4 @@
 position = Vector2(260, 447)
 
 [node name="PowerUp" parent="." instance=ExtResource("2_xsgu5")]
-position = Vector2(231, 236)
+position = Vector2(231, 235)
