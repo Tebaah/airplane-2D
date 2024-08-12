@@ -40,17 +40,17 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        Movement();
+        Movement(delta);
         MoveAndSlide();
     }
 
-    private void Movement()
+    private void Movement(double delta)
     {
         // obtenemos la direccion del input
         Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
         
         // almacenamos en velocity la direccion normalizada por la velocidad
-        Velocity = inputDirection.Normalized() * speed;
+        Velocity = inputDirection.Normalized() * speed * (float)delta;
 
         LimitOfMovement();
     }

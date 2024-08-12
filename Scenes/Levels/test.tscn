@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://0gjw25mwekud"]
+[gd_scene load_steps=4 format=3 uid="uid://0gjw25mwekud"]
 
 [ext_resource type="PackedScene" uid="uid://c513x5kc2bvfi" path="res://Scenes/Characters/Player/player.tscn" id="1_2qib5"]
 [ext_resource type="PackedScene" uid="uid://wwog5s5m2skh" path="res://Scenes/Objects/Power Up/power_up.tscn" id="2_xsgu5"]
+[ext_resource type="PackedScene" uid="uid://ctu2javl50rkb" path="res://Scenes/Characters/Enemy/enemy.tscn" id="3_tw8ky"]
 
 [node name="Test" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_2qib5")]
-position = Vector2(260, 447)
+position = Vector2(259, 448)
 
 [node name="PowerUp" parent="." instance=ExtResource("2_xsgu5")]
 position = Vector2(231, 235)
+
+[node name="Enemy" parent="." instance=ExtResource("3_tw8ky")]
+position = Vector2(272, 13)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_tw8ky")]
+position = Vector2(335, 79)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_tw8ky")]
+position = Vector2(199, 16)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_tw8ky")]
+position = Vector2(424, 30)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_tw8ky")]
+position = Vector2(80, 13)
