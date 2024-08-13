@@ -5,20 +5,30 @@ public partial class EnemyController : Area2D
 {
     // variables
 
-    // movimiento
-    private float _speed = 75f;
-
     // nivel que establece las caracteristicas del enemigo
-    public int level = 3;
+    [Export]public int level;
 
-    // vida
-    public int life;
+    // comportamiento del enemigo
+    private float _speed;
+    private int _life;
+
+    // ataque del enemigo
+    [Export] public PackedScene bulletEnemy;
+    private Marker2D _marker;
+    private bool _canShoot = true;
 
     // metodos
     public override void _Ready()
     {
         SetLevel(level);
-        GD.Print($"Enemy life: {life}");
+
+        // inicializar variables
+        _marker = GetNode<Marker2D>("Marker2D");
+    }
+
+    public override void _Process(double delta)
+    {
+        Shoot();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -35,19 +45,23 @@ public partial class EnemyController : Area2D
         this.level = level;
         Random random = new Random();
 
+        // establecera las caracteristicas del enemigo segun el nivel
         switch(level)
         {
             case 1:
-                life = random.Next(1, 2);
+                _life = random.Next(1, 2);
+                _speed = random.Next(75, 100);
                 break;
             case 2:
-                life = random.Next(3, 5);
+                _life = random.Next(3, 5);
+                _speed = random.Next(100, 125);
                 break;
             case 3:
-                life = random.Next(5, 10);
+                _life = random.Next(5, 10);
+                _speed = random.Next(125, 150);
                 break;
             default:
-                life = 1;
+                _life = 1;
                 break;
         }
     }
@@ -62,11 +76,25 @@ public partial class EnemyController : Area2D
 
     public void TakeDamage(int damage)
     {
-        life -= damage;
+        _life -= damage;
 
-        if(life <= 0)
+        if(_life <= 0)
         {
             QueueFree();
+        }
+    }
+
+    public async void Shoot()
+    {
+        if(_canShoot == true)
+        {
+            BulletEnemy bullet = (BulletEnemy)bulletEnemy.Instantiate();
+            bullet.GlobalPosition = _marker.GlobalPosition;
+            GetParent().AddChild(bullet);
+            _canShoot = false;
+
+            await ToSignal(GetTree().CreateTimer(2), "timeout");
+            _canShoot = true;
         }
     }
 }
