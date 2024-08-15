@@ -12,7 +12,7 @@ size = Vector2(22, 12)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_om04q")
-speed = 250.0
+speed = 12000.0
 bullet = ExtResource("2_ea6l6")
 
 [node name="DetectElements" type="Area2D" parent="."]

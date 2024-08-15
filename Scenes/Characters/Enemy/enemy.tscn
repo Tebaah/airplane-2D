@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctu2javl50rkb"]
+
+[ext_resource type="Texture2D" uid="uid://beie3ea6ulen" path="res://Assets/Enemy/enemy1.png" id="1_jh571"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyController.cs" id="1_s8s5s"]
+[ext_resource type="PackedScene" uid="uid://cxl11qdynw1b2" path="res://Scenes/Characters/Enemy/bullet_enemy.tscn" id="2_vyqda"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8kgq"]
+size = Vector2(28, 11)
+
+[node name="Enemy" type="Area2D" groups=["Enemy"]]
+position = Vector2(89, -1)
+rotation = 3.14159
+script = ExtResource("1_s8s5s")
+bulletEnemy = ExtResource("2_vyqda")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_jh571")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_x8kgq")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(4.56333e-05, -18)
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

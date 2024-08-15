@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d2vuwst3bo1yx"]
+
+[node name="NormalLevel" type="Node2D"]
+
+[node name="HorizontalSpwan" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="HorizontalSpwan"]
+
+[node name="VerticalLeftSpawn" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="VerticalLeftSpawn"]
+
+[node name="verticalRightSpawn" type="Node2D" parent="."]
+position = Vector2(480, 0)
+
+[node name="Marker2D" type="Marker2D" parent="verticalRightSpawn"]
