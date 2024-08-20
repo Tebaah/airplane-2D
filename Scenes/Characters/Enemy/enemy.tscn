@@ -11,6 +11,7 @@ size = Vector2(28, 11)
 position = Vector2(89, -1)
 rotation = 3.14159
 script = ExtResource("1_s8s5s")
+level = 1
 bulletEnemy = ExtResource("2_vyqda")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
