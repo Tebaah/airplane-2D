@@ -7,6 +7,7 @@
 size = Vector2(4, 11)
 
 [node name="BulletEnemy" type="Area2D"]
+collision_layer = 0
 script = ExtResource("1_70k8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -16,3 +17,5 @@ shape = SubResource("RectangleShape2D_348qc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_wku1n")
+
+[connection signal="body_entered" from="." to="." method="OnPlayerEntered"]

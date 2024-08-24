@@ -5,24 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://cxl11qdynw1b2" path="res://Scenes/Characters/Enemy/bullet_enemy.tscn" id="2_vyqda"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8kgq"]
-size = Vector2(28, 11)
+size = Vector2(9, 28)
 
 [node name="Enemy" type="Area2D" groups=["Enemy"]]
-position = Vector2(89, -1)
-rotation = 3.14159
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_s8s5s")
-level = 1
 bulletEnemy = ExtResource("2_vyqda")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+rotation = 1.5708
 texture = ExtResource("1_jh571")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
+position = Vector2(3.5, -1.5299e-07)
 shape = SubResource("RectangleShape2D_x8kgq")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(4.56333e-05, -18)
+position = Vector2(18, 0)
 
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
