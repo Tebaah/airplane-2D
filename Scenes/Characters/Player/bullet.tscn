@@ -8,6 +8,8 @@ radius = 2.0
 height = 8.0
 
 [node name="Bullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_3g7ga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

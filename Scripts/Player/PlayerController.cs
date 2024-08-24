@@ -29,8 +29,6 @@ public partial class PlayerController : CharacterBody2D
 
         global = GetNode<Global>("/root/Global");
 
-        GD.Print(global.life);
-
     }
 
     public override void _Process(double delta)

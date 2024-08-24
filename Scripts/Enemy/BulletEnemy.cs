@@ -16,4 +16,12 @@ public partial class BulletEnemy : Area2D
             QueueFree();
         }
     }
+
+    public void OnPlayerEntered(Node2D body)
+    {
+        if(body.Name == "Player")
+        {
+            QueueFree();
+        }
+    }
 }
