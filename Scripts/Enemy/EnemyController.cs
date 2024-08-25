@@ -49,10 +49,11 @@ public partial class EnemyController : Area2D
         Movement(delta);
 
         // si el enemigo sale de la pantalla, se elimina
-        if(Position.Y > 730)
+        if(Position.Y > 730 || _global.life <= 0)
         {
             QueueFree();
         }
+
     }
 
     public void SetLevel(int level)

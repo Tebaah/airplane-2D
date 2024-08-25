@@ -11,11 +11,15 @@ public partial class LevelManager : Node2D
     private float _time = 0.75f;
     private bool _canSpawn = true;
 
+    // global variables
+    private Global _global;
+
     // metodos
     public override void _Ready()
     {
         // inicializamos el marcador de spawn de enemigos
         _horizontalMarker = GetNode<Marker2D>("EnemySpawn/Marker2D");
+        _global = GetNode<Global>("/root/Global");
     }
 
     public override void _Process(double delta)
@@ -28,7 +32,10 @@ public partial class LevelManager : Node2D
         _horizontalMarker.Position = new Vector2(positionX, -5);
 
         // llamamos al metodo de spawn de enemigos
-        HorizontalSpawnEnemy();
+        if(_global.life == 1)
+        {
+            HorizontalSpawnEnemy();
+        }
     }
 
     private async void HorizontalSpawnEnemy()

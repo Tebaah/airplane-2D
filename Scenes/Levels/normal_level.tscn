@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuso6pygpfg7r"]
+[gd_scene load_steps=5 format=3 uid="uid://cuso6pygpfg7r"]
 
 [ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_hwpqf"]
 [ext_resource type="PackedScene" uid="uid://ctu2javl50rkb" path="res://Scenes/Characters/Enemy/enemy.tscn" id="2_mmu83"]
 [ext_resource type="PackedScene" uid="uid://c513x5kc2bvfi" path="res://Scenes/Characters/Player/player.tscn" id="3_50l8i"]
+[ext_resource type="PackedScene" uid="uid://cmm6k12urr0lw" path="res://Scenes/Interface/user_interface.tscn" id="4_lolyb"]
 
 [node name="NormalLevel" type="Node2D"]
 script = ExtResource("1_hwpqf")
@@ -15,3 +16,5 @@ metadata/_edit_vertical_guides_ = [80.0, 400.0]
 
 [node name="Player" parent="." instance=ExtResource("3_50l8i")]
 position = Vector2(258, 655)
+
+[node name="UserInterface" parent="." instance=ExtResource("4_lolyb")]
