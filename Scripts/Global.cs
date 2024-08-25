@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Global : Node
+public partial class Global : Node2D
 {
     // variables
 
@@ -10,4 +10,5 @@ public partial class Global : Node
 
     // puntaje del jugador
     public int score = 0;
+
 }

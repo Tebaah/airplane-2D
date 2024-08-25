@@ -10,13 +10,13 @@
 size = Vector2(22, 12)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 22
 script = ExtResource("1_om04q")
 speed = 12000.0
 bullet = ExtResource("2_ea6l6")
 
 [node name="DetectElements" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectElements"]
 shape = SubResource("RectangleShape2D_3pear")
@@ -42,3 +42,4 @@ position = Vector2(-10, -3)
 position = Vector2(10, -3)
 
 [connection signal="area_entered" from="DetectElements" to="." method="DetectPowerUp"]
+[connection signal="area_entered" from="DetectElements" to="." method="DetectDamage"]
