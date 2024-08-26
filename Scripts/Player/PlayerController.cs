@@ -144,6 +144,7 @@ public partial class PlayerController : CharacterBody2D
         if(body.IsInGroup("PowerUp"))
         {
             LevelUpAttack();
+            body.QueueFree();
         }
     }
 
