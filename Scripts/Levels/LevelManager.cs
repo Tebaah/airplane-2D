@@ -10,6 +10,7 @@ public partial class LevelManager : Node2D
     private Marker2D _enemyMarker;
     private float _time = 0.75f;
     private bool _canSpawn = true;
+    private int _enemyIndex;
     
     // spawn de powerups
     [Export] public PackedScene powerup;
@@ -26,6 +27,7 @@ public partial class LevelManager : Node2D
         _enemyMarker = GetNode<Marker2D>("EnemySpawn/Marker2D");
         _global = GetNode<Global>("/root/Global");
         _powerupMarker = GetNode<Marker2D>("PowerUpSpawn/Marker2D");
+
     }
 
     public override void _Process(double delta)
@@ -48,11 +50,14 @@ public partial class LevelManager : Node2D
 
     private async void SpawnEnemy()
     {
+        Random random = new();
+        _enemyIndex = random.Next(0, enemy.Length);
+        
         // si _canSpawn es true, iniciamos el spawn de enemigos
         if(_canSpawn == true)
         {
             // instanciamos un nuevo enemigo
-            Area2D newEnemy = (Area2D)enemy[0].Instantiate();
+            Area2D newEnemy = (Area2D)enemy[_enemyIndex].Instantiate();
             newEnemy.GlobalPosition = _enemyMarker.GlobalPosition;
             GetParent().AddChild(newEnemy);
             _canSpawn = false;

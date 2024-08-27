@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuso6pygpfg7r"]
+[gd_scene load_steps=7 format=3 uid="uid://cuso6pygpfg7r"]
 
-[ext_resource type="Script" path="res://Scripts/LevelManager.cs" id="1_hwpqf"]
+[ext_resource type="Script" path="res://Scripts/Levels/LevelManager.cs" id="1_hwpqf"]
 [ext_resource type="PackedScene" uid="uid://ctu2javl50rkb" path="res://Scenes/Characters/Enemy/enemy.tscn" id="2_mmu83"]
 [ext_resource type="PackedScene" uid="uid://c513x5kc2bvfi" path="res://Scenes/Characters/Player/player.tscn" id="3_50l8i"]
+[ext_resource type="PackedScene" uid="uid://bdq78y7koumcy" path="res://Scenes/Characters/Enemy/enemy_two.tscn" id="3_byfij"]
 [ext_resource type="PackedScene" uid="uid://wwog5s5m2skh" path="res://Scenes/Objects/Power Up/power_up.tscn" id="3_ve5bs"]
 [ext_resource type="PackedScene" uid="uid://cmm6k12urr0lw" path="res://Scenes/Interface/user_interface.tscn" id="4_lolyb"]
 
 [node name="NormalLevel" type="Node2D"]
 script = ExtResource("1_hwpqf")
-enemy = Array[PackedScene]([ExtResource("2_mmu83")])
+enemy = Array[PackedScene]([ExtResource("2_mmu83"), ExtResource("3_byfij")])
 powerup = ExtResource("3_ve5bs")
 metadata/_edit_vertical_guides_ = [80.0, 400.0]
 
