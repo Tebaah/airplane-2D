@@ -14,12 +14,17 @@ public partial class EnemyController : Area2D
     private int _score;
     private bool _changeDirection = false;
     private Vector2 _direction;
+    private CollisionShape2D _collisionShape;
 
     // ataque del enemigo
     [Export] public PackedScene bulletEnemy;
     private Marker2D _marker;
     private bool _canShoot = true;
     private CharacterBody2D _target;
+
+    // effects TODO: implementar efectos de sonido y animaciones
+    private AudioStreamPlayer _audio;
+
 
     // global variables
     private Global _global;
@@ -36,6 +41,8 @@ public partial class EnemyController : Area2D
         _marker = GetNode<Marker2D>("Marker2D");
         _target = GetParent().GetNode<CharacterBody2D>("/root/NormalLevel/Player");
         _global = GetNode<Global>("/root/Global");
+        _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
     }
 
     public override void _Process(double delta)
@@ -116,19 +123,23 @@ public partial class EnemyController : Area2D
 
     public void OnAreaEntered(Area2D area)
     {
-        if(area.IsInGroup("Bullet"))
+        if(area.IsInGroup("Bullet") && _life > 0)
         {
             TakeDamage(1);
         }
     }
 
-    public void TakeDamage(int damage)
+    public async void TakeDamage(int damage)
     {
         _life -= damage;
 
         if(_life <= 0)
         {
             _global.score += _score;
+            // _collisionShape.Disabled = true;
+            _audio.Play();
+
+            await _audio.ToSignal(_audio, "finished");
             QueueFree();
         }
     }

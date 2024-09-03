@@ -46,6 +46,8 @@ public partial class LevelManager : Node2D
             SpawnEnemy();
             SpawnPowerup();
         }
+   
+
     }
 
     private async void SpawnEnemy()
