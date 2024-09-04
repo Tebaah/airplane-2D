@@ -10,13 +10,14 @@ public partial class PlayerController : CharacterBody2D
     private float _backlink = 5f;
 
     // ataque
-    [Export] public PackedScene bullet;
+    [Export] public PackedScene[] bullet;
     private Marker2D _spawnBullets;
-    private Marker2D _spawnBullets2;
-    private Marker2D _spawnBullets3;
+    private bool _canShoot = true;
     private int _levelAttack = 1;
 
-    // vida
+    // sonidos y efectos
+    private AudioStreamPlayer _audio;
+    // globales
     public Global global;
 
     // metodos
@@ -24,10 +25,9 @@ public partial class PlayerController : CharacterBody2D
     {
         // TODO: inicializar variables de manera mas efectva y limpia
         _spawnBullets = GetNode<Marker2D>("Weapons/Marker2D");
-        _spawnBullets2 = GetNode<Marker2D>("Weapons/Marker2D2");
-        _spawnBullets3 = GetNode<Marker2D>("Weapons/Marker2D3");
 
         global = GetNode<Global>("/root/Global");
+        _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
     }
 
@@ -74,46 +74,42 @@ public partial class PlayerController : CharacterBody2D
         
     }
 
-    private void Attack()
+    private async void Attack()
     {
         // 
-        if (Input.IsActionJustPressed("attack"))
+        if (Input.IsActionJustPressed("attack") && _canShoot) 
         {
+            _canShoot = false;
             Shoot();
+
+            await ToSignal(GetTree().CreateTimer(0.20f), "timeout");
+            _canShoot = true;
         }
     }
 
     private void Shoot()
     {
-        if(_levelAttack == 1)
+        switch (_levelAttack)
         {
-            Area2D newBullet = (Area2D)bullet.Instantiate();
-            newBullet.GlobalPosition = _spawnBullets.GlobalPosition;
-            GetParent().AddChild(newBullet);
-        }
-        if(_levelAttack == 2)
-        {
-            Area2D newBullet2 = (Area2D)bullet.Instantiate();
-            newBullet2.GlobalPosition = _spawnBullets2.GlobalPosition;
-            GetParent().AddChild(newBullet2);
-
-            Area2D newBullet3 = (Area2D)bullet.Instantiate();
-            newBullet3.GlobalPosition = _spawnBullets3.GlobalPosition;
-            GetParent().AddChild(newBullet3);
-        }
-        if(_levelAttack == 3)
-        {
-            Area2D newBullet = (Area2D)bullet.Instantiate();
-            newBullet.GlobalPosition = _spawnBullets.GlobalPosition;
-            GetParent().AddChild(newBullet);
-
-            Area2D newBullet2 = (Area2D)bullet.Instantiate();
-            newBullet2.GlobalPosition = _spawnBullets2.GlobalPosition;
-            GetParent().AddChild(newBullet2);
-
-            Area2D newBullet3 = (Area2D)bullet.Instantiate();
-            newBullet3.GlobalPosition = _spawnBullets3.GlobalPosition;
-            GetParent().AddChild(newBullet3);
+            // instanciamos la bala dependiendo del nivel de ataque
+            case 1:
+                Bullet newBullet1 = bullet[0].Instantiate() as Bullet;
+                newBullet1.Position = _spawnBullets.GlobalPosition;
+                GetParent().AddChild(newBullet1);
+                _audio.Play();
+                break;
+            case 2:
+                Bullet newBullet2 = bullet[1].Instantiate() as Bullet;
+                newBullet2.Position = _spawnBullets.GlobalPosition;
+                GetParent().AddChild(newBullet2);
+                _audio.Play();
+                break;
+            case 3:
+                Bullet newBullet3 = bullet[2].Instantiate() as Bullet;
+                newBullet3.Position = _spawnBullets.GlobalPosition;
+                GetParent().AddChild(newBullet3);
+                _audio.Play();
+                break;
         }
     }
 

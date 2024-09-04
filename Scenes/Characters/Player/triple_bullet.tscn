@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp1ep47nbxh76"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Bullet.cs" id="1_7hgc3"]
+[ext_resource type="Texture2D" uid="uid://bc8ffjpqpu0bg" path="res://Assets/Player/bullet.png" id="2_ryqsp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpo5b"]
+radius = 2.0
+height = 8.0
+
+[node name="TripleBullet" type="Area2D" groups=["Bullet"]]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_7hgc3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-9, -8)
+texture = ExtResource("2_ryqsp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, -8)
+shape = SubResource("CapsuleShape2D_kpo5b")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(11, -8)
+texture = ExtResource("2_ryqsp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(10, -8)
+shape = SubResource("CapsuleShape2D_kpo5b")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -22)
+texture = ExtResource("2_ryqsp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_kpo5b")
+
+[connection signal="area_entered" from="." to="." method="OnEnteredEnemy"]

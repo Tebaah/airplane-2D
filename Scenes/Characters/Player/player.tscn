@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c513x5kc2bvfi"]
+[gd_scene load_steps=9 format=3 uid="uid://c513x5kc2bvfi"]
 
 [ext_resource type="Texture2D" uid="uid://udg5nu6ruiu1" path="res://Assets/Player/airplane.png" id="1_f4kdh"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_om04q"]
-[ext_resource type="PackedScene" uid="uid://dnkxfsgq0cxiy" path="res://Scenes/Characters/Player/bullet.tscn" id="2_ea6l6"]
+[ext_resource type="PackedScene" uid="uid://dnkxfsgq0cxiy" path="res://Scenes/Characters/Player/single_bullet.tscn" id="2_ea6l6"]
+[ext_resource type="PackedScene" uid="uid://c5ipp7qpjay8q" path="res://Scenes/Characters/Player/double_bullet.tscn" id="3_js1vl"]
+[ext_resource type="PackedScene" uid="uid://dp1ep47nbxh76" path="res://Scenes/Characters/Player/triple_bullet.tscn" id="4_r0dkh"]
+[ext_resource type="AudioStream" uid="uid://ceegcs34vjfil" path="res://Assets/Sounds/Effects/laserShoot.wav" id="6_yyq87"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pear"]
 
@@ -13,7 +16,7 @@ size = Vector2(22, 12)
 collision_mask = 22
 script = ExtResource("1_om04q")
 speed = 12000.0
-bullet = ExtResource("2_ea6l6")
+bullet = Array[PackedScene]([ExtResource("2_ea6l6"), ExtResource("3_js1vl"), ExtResource("4_r0dkh")])
 
 [node name="DetectElements" type="Area2D" parent="."]
 collision_mask = 22
@@ -32,14 +35,11 @@ texture = ExtResource("1_f4kdh")
 [node name="Weapons" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="Weapons"]
-position = Vector2(0, -18)
 scale = Vector2(1, 1.00287)
 
-[node name="Marker2D2" type="Marker2D" parent="Weapons"]
-position = Vector2(-10, -3)
-
-[node name="Marker2D3" type="Marker2D" parent="Weapons"]
-position = Vector2(10, -3)
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_yyq87")
+bus = &"Effects"
 
 [connection signal="area_entered" from="DetectElements" to="." method="DetectPowerUp"]
 [connection signal="area_entered" from="DetectElements" to="." method="DetectDamage"]
