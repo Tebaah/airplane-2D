@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ddkd6cathdav"]
+
+[node name="PanicLevel" type="Node2D"]

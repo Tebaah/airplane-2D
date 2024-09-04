@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddfqb1ons5drf"]
+
+[ext_resource type="Texture2D" uid="uid://btcky18qasr41" path="res://Assets/Enemy/bulletenemy.png" id="1_aldxg"]
+[ext_resource type="Script" path="res://Scripts/Enemy/BulletEnemy.cs" id="1_l5fct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4y0r"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5yiw"]
+size = Vector2(4, 10)
+
+[node name="BulletDouble" type="Area2D" groups=["BulletEnemy"]]
+collision_layer = 16
+script = ExtResource("1_l5fct")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14, 0)
+shape = SubResource("RectangleShape2D_q4y0r")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_y5yiw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(14, 0)
+texture = ExtResource("1_aldxg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-14, 0)
+texture = ExtResource("1_aldxg")
