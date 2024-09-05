@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bo0hdtym72123" path="res://Assets/Enemy/EnemyTwoShoot.png" id="1_cf06l"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyController.cs" id="1_cl72q"]
 [ext_resource type="PackedScene" uid="uid://ddfqb1ons5drf" path="res://Scenes/Characters/Enemy/bullet_double.tscn" id="2_u4ws0"]
-[ext_resource type="AudioStream" uid="uid://bhejlq47k17ua" path="res://Assets/Sounds/Effects/explosion.wav" id="4_kkwwg"]
+[ext_resource type="AudioStream" uid="uid://dekl7h0o0enmh" path="res://Assets/Sounds/Effects/explosion.wav" id="4_kkwwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewwdp"]
 

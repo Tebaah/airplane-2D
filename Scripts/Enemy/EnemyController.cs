@@ -125,7 +125,11 @@ public partial class EnemyController : Area2D
     {
         if(area.IsInGroup("Bullet") && _life > 0)
         {
-            TakeDamage(1);
+            Bullet bullet = area as Bullet;
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+            }
         }
     }
 
