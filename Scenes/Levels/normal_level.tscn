@@ -11,7 +11,19 @@
 script = ExtResource("1_hwpqf")
 enemy = Array[PackedScene]([ExtResource("2_mmu83"), ExtResource("3_byfij")])
 powerup = ExtResource("3_ve5bs")
+player = ExtResource("3_50l8i")
 metadata/_edit_vertical_guides_ = [80.0, 400.0]
+
+[node name="BackGround" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BackGround"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.092234, 0.122736, 0.14976, 1)
 
 [node name="EnemySpawn" type="Node2D" parent="."]
 
@@ -21,7 +33,9 @@ metadata/_edit_vertical_guides_ = [80.0, 400.0]
 
 [node name="Marker2D" type="Marker2D" parent="PowerUpSpawn"]
 
-[node name="Player" parent="." instance=ExtResource("3_50l8i")]
-position = Vector2(264, 637)
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(242, 653)
+
+[node name="Marker2D" type="Marker2D" parent="PlayerSpawn"]
 
 [node name="UserInterface" parent="." instance=ExtResource("4_lolyb")]

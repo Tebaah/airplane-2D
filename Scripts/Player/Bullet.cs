@@ -51,7 +51,6 @@ public partial class Bullet : Area2D
                 damage = 3;
                 break;
             default:
-                GD.Print("Bullet level 1");
                 break;
         }
     }

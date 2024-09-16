@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyController.cs" id="1_s8s5s"]
 [ext_resource type="PackedScene" uid="uid://cxl11qdynw1b2" path="res://Scenes/Characters/Enemy/bullet_simple.tscn" id="2_vyqda"]
-[ext_resource type="Texture2D" uid="uid://cyinyidpdou8f" path="res://Assets/Enemy/EnemyOneShoot.png" id="3_pjdxt"]
+[ext_resource type="Texture2D" uid="uid://bllrysdgjg0le" path="res://Assets/Sprites/enemy_A.png" id="3_enlgb"]
 [ext_resource type="AudioStream" uid="uid://dekl7h0o0enmh" path="res://Assets/Sounds/Effects/explosion.wav" id="4_vgjpe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lin3e"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6fe3h"]
+radius = 5.0
 
 [node name="Enemy" type="Area2D" groups=["Enemy"]]
 rotation = 1.5708
@@ -15,14 +16,20 @@ script = ExtResource("1_s8s5s")
 bulletEnemy = ExtResource("2_vyqda")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 1.0699e-05)
-rotation = 0.785397
-shape = SubResource("RectangleShape2D_lin3e")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6fe3h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 3.61999e-05)
+rotation = 3.14159
+shape = SubResource("CapsuleShape2D_6fe3h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-3.8147e-06, 0)
 rotation = 1.5708
-texture = ExtResource("3_pjdxt")
+scale = Vector2(0.303606, 0.303606)
+texture = ExtResource("3_enlgb")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(18, 0)

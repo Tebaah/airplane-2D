@@ -17,6 +17,10 @@ public partial class LevelManager : Node2D
     private Marker2D _powerupMarker;
     private float _timePowerup = 10f;
     private bool _canSpawnPowerup = true;
+
+    //  spawn de juagdor
+    [Export] public PackedScene player;
+    private Marker2D _playerMarker;
     // global variables
     private Global _global;
 
@@ -24,9 +28,13 @@ public partial class LevelManager : Node2D
     public override void _Ready()
     {
         // inicializamos el marcador de spawn de enemigos
+        _playerMarker = GetNode<Marker2D>("PlayerSpawn/Marker2D");
         _enemyMarker = GetNode<Marker2D>("EnemySpawn/Marker2D");
-        _global = GetNode<Global>("/root/Global");
         _powerupMarker = GetNode<Marker2D>("PowerUpSpawn/Marker2D");
+        _global = GetNode<Global>("/root/Global");
+
+        SpawnPlayer();
+        GameStarter();
 
     }
 
@@ -41,7 +49,7 @@ public partial class LevelManager : Node2D
         _powerupMarker.Position = new Vector2(positionX, -5);
 
         // llamamos al metodo de spawn de enemigos
-        if(_global.life == 1)
+        if(_global.life == 1 && _global.isPlaying == true)
         {
             SpawnEnemy();
             SpawnPowerup();
@@ -85,6 +93,19 @@ public partial class LevelManager : Node2D
             await ToSignal(GetTree().CreateTimer(_timePowerup), "timeout");
             _canSpawnPowerup = true;
         }
+    }
+
+    private void SpawnPlayer()
+    {
+        // instanciamos al jugador
+        CharacterBody2D newPlayer = (CharacterBody2D)player.Instantiate();
+        newPlayer.GlobalPosition = _playerMarker.GlobalPosition;
+        AddChild(newPlayer);
+    }
+    private async void GameStarter()
+    {
+        await ToSignal(GetTree().CreateTimer(5), "timeout");
+        _global.isPlaying = true;
     }
 
 }

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bdq78y7koumcy"]
 
-[ext_resource type="Texture2D" uid="uid://bo0hdtym72123" path="res://Assets/Enemy/EnemyTwoShoot.png" id="1_cf06l"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyController.cs" id="1_cl72q"]
 [ext_resource type="PackedScene" uid="uid://ddfqb1ons5drf" path="res://Scenes/Characters/Enemy/bullet_double.tscn" id="2_u4ws0"]
+[ext_resource type="Texture2D" uid="uid://miqlg36e3d18" path="res://Assets/Sprites/enemy_B.png" id="3_c1tya"]
 [ext_resource type="AudioStream" uid="uid://dekl7h0o0enmh" path="res://Assets/Sounds/Effects/explosion.wav" id="4_kkwwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewwdp"]
@@ -22,7 +22,8 @@ shape = SubResource("RectangleShape2D_ewwdp")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 rotation = 1.5708
-texture = ExtResource("1_cf06l")
+scale = Vector2(0.304, 0.304)
+texture = ExtResource("3_c1tya")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(-3, 0)

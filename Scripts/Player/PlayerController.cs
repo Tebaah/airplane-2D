@@ -23,9 +23,8 @@ public partial class PlayerController : CharacterBody2D
     // metodos
     public override void _Ready()
     {
-        // TODO: inicializar variables de manera mas efectva y limpia
+        // insicalizar variables
         _spawnBullets = GetNode<Marker2D>("Weapons/Marker2D");
-
         global = GetNode<Global>("/root/Global");
         _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 

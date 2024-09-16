@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnkxfsgq0cxiy"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Bullet.cs" id="1_4yq7s"]
-[ext_resource type="Texture2D" uid="uid://bc8ffjpqpu0bg" path="res://Assets/Player/bullet.png" id="2_eixqk"]
+[ext_resource type="Texture2D" uid="uid://dgi3cjl148wqs" path="res://Assets/Sprites/effect_purple.png" id="2_at8jt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpo5b"]
 radius = 2.0
@@ -15,8 +15,9 @@ level = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1, -21)
-texture = ExtResource("2_eixqk")
+position = Vector2(-0.250001, -19.5)
+scale = Vector2(0.0664062, 0.0859375)
+texture = ExtResource("2_at8jt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -21)
