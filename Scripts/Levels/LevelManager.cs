@@ -67,7 +67,7 @@ public partial class LevelManager : Node2D
         if(_canSpawn == true)
         {
             // instanciamos un nuevo enemigo
-            Area2D newEnemy = (Area2D)enemy[_enemyIndex].Instantiate();
+            Area2D newEnemy = enemy[_enemyIndex].Instantiate() as Area2D;
             newEnemy.GlobalPosition = _enemyMarker.GlobalPosition;
             GetParent().AddChild(newEnemy);
             _canSpawn = false;
@@ -102,6 +102,7 @@ public partial class LevelManager : Node2D
         newPlayer.GlobalPosition = _playerMarker.GlobalPosition;
         AddChild(newPlayer);
     }
+
     private async void GameStarter()
     {
         await ToSignal(GetTree().CreateTimer(5), "timeout");

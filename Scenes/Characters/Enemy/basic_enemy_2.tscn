@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckhx073xao1q1"]
+
+[ext_resource type="PackedScene" uid="uid://bj32abq1ho8qy" path="res://Scenes/Characters/Enemy/enemy_base.tscn" id="1_baqxp"]
+[ext_resource type="Texture2D" uid="uid://miqlg36e3d18" path="res://Assets/Sprites/enemy_B.png" id="2_rg01g"]
+[ext_resource type="Script" path="res://Scripts/Enemy/BasicEnemy.cs" id="2_tirfb"]
+[ext_resource type="PackedScene" uid="uid://ddfqb1ons5drf" path="res://Scenes/Characters/Enemy/bullet_double.tscn" id="3_fgvoh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yeelx"]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4cfho"]
+radius = 4.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qpvnm"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"destroy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rg01g")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="BasicEnemy2" instance=ExtResource("1_baqxp")]
+rotation = 1.5708
+script = ExtResource("2_tirfb")
+bulletEnemy = ExtResource("3_fgvoh")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_yeelx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="1"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_4cfho")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+rotation = 1.5708
+scale = Vector2(0.304, 0.304)
+sprite_frames = SubResource("SpriteFrames_qpvnm")
+animation = &"destroy"
+
+[node name="AudioStreamPlayer" parent="." index="4"]
+bus = &"Effects"

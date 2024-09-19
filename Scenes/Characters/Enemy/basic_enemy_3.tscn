@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvnb6kqetgmma"]
+
+[ext_resource type="PackedScene" uid="uid://bj32abq1ho8qy" path="res://Scenes/Characters/Enemy/enemy_base.tscn" id="1_nl1b2"]
+[ext_resource type="PackedScene" uid="uid://ddfqb1ons5drf" path="res://Scenes/Characters/Enemy/bullet_double.tscn" id="2_bec0h"]
+[ext_resource type="Texture2D" uid="uid://cu7a7p1icxfg2" path="res://Assets/Sprites/enemy_C.png" id="2_tnpti"]
+[ext_resource type="Script" path="res://Scripts/Enemy/BasicEnemy.cs" id="2_xrwc0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_632fk"]
+radius = 23.0
+height = 128.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwrpy"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"destroy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tnpti")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="BasicEnemy3" instance=ExtResource("1_nl1b2")]
+rotation = 1.5708
+scale = Vector2(0.304, 0.304)
+script = ExtResource("2_xrwc0")
+bulletEnemy = ExtResource("2_bec0h")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_632fk")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_nwrpy")
