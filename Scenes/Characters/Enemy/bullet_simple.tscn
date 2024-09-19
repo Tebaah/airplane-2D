@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxl11qdynw1b2"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BulletEnemy.cs" id="1_omyld"]
-[ext_resource type="Texture2D" uid="uid://btcky18qasr41" path="res://Assets/Enemy/bulletenemy.png" id="2_ik527"]
+[ext_resource type="Texture2D" uid="uid://bw1ml8ashxtfq" path="res://Assets/Sprites/effect_yellow.png" id="2_34lxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_348qc"]
 size = Vector2(4, 11)
@@ -16,6 +16,8 @@ shape = SubResource("RectangleShape2D_348qc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_ik527")
+position = Vector2(0, -0.5)
+scale = Vector2(0.066, 0.0859375)
+texture = ExtResource("2_34lxi")
 
 [connection signal="body_entered" from="." to="." method="OnPlayerEntered"]

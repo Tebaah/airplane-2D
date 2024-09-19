@@ -5,10 +5,10 @@ public partial class Global : Node2D
 {
     // variables
 
-    // vida del jugador
+    // variables gloables del jugador
     public int life = 1;
-
-    // puntaje del jugador
     public int score = 0;
 
+    // variables de estado del juego
+    public bool isPlaying = false;
 }

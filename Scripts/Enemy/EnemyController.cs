@@ -24,7 +24,7 @@ public partial class EnemyController : Area2D
 
     // effects TODO: implementar efectos de sonido y animaciones
     private AudioStreamPlayer _audio;
-
+    private AnimatedSprite2D _animatedSprite;
 
     // global variables
     private Global _global;
@@ -32,59 +32,45 @@ public partial class EnemyController : Area2D
     // metodos
     public override void _Ready()
     {
-        // establecer el nivel del enemigo de manera aleatoria
-        Random random = new Random();
-        level = random.Next(1, 4);
-        SetLevel(level);
-
-        // inicializar variables
+        // inicializacion de variables y nodos
         _marker = GetNode<Marker2D>("Marker2D");
-        _target = GetParent().GetNode<CharacterBody2D>("/root/NormalLevel/Player");
-        _global = GetNode<Global>("/root/Global");
         _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
-    }
-
-    public override void _Process(double delta)
-    {
-        // llamamos al metodo de disparo
-        Shoot();
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        Movement(delta);
-
-        // si el enemigo sale de la pantalla, se elimina
-        if(Position.Y > 730 || _global.life <= 0)
-        {
-            QueueFree();
-        }
+        _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        
+        // inicializacion de variables globales y externas
+        _global = GetNode<Global>("/root/Global");
+        _target = GetParent().GetNode<CharacterBody2D>("/root/NormalLevel/Player");
 
     }
 
-    public void SetLevel(int level)
+    public void SetLevel()
     {
-        this.level = level;
-        Random random = new Random();
+        Random randomLevel = new();
+        level = randomLevel.Next(1, 4);
+
+        Random randomAttributes = new();
 
         // establecera las caracteristicas del enemigo segun el nivel
         switch(level)
         {
             case 1:
-                _life = random.Next(1, 2);
-                _speed = random.Next(75, 100);
-                _score = random.Next(1, 2);
+                _life = randomAttributes.Next(1, 2);
+                _speed = randomAttributes.Next(75, 100);
+                _score = randomAttributes.Next(1, 2);
+                _animatedSprite.Animation = "move";
                 break;
             case 2:
-                _life = random.Next(2, 3);
-                _speed = random.Next(100, 125);
-                _score = random.Next(3, 5);
+                _life = randomAttributes.Next(2, 3);
+                _speed = randomAttributes.Next(100, 125);
+                _score = randomAttributes.Next(3, 5);
+                _animatedSprite.Animation = "move";
                 break;
             case 3:
-                _life = random.Next(3, 4);
-                _speed = random.Next(125, 150);
-                _score = random.Next(5, 10);
+                _life = randomAttributes.Next(3, 4);
+                _speed = randomAttributes.Next(125, 150);
+                _score = randomAttributes.Next(5, 10);
+                _animatedSprite.Animation = "move";
                 break;
             default:
                 _life = 1;
@@ -92,7 +78,7 @@ public partial class EnemyController : Area2D
         }
     }
 
-    private void Movement(double delta)
+    public void Movement(double delta)
     {
         // en el eje Y en el pixel 300 cambiara de direccion
         if(Position.Y > 300 && _changeDirection == false)
@@ -125,7 +111,11 @@ public partial class EnemyController : Area2D
     {
         if(area.IsInGroup("Bullet") && _life > 0)
         {
-            TakeDamage(1);
+            Bullet bullet = area as Bullet;
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+            }
         }
     }
 
@@ -136,8 +126,8 @@ public partial class EnemyController : Area2D
         if(_life <= 0)
         {
             _global.score += _score;
-            // _collisionShape.Disabled = true;
             _audio.Play();
+            _animatedSprite.Animation = "destroy";
 
             await _audio.ToSignal(_audio, "finished");
             QueueFree();
@@ -157,4 +147,15 @@ public partial class EnemyController : Area2D
             _canShoot = true;
         }
     }
+
+    public void Destroy() 
+    {
+        if(Position.Y > GetViewportRect().Size.Y || _global.life <= 0)
+        {
+            QueueFree();
+        }
+
+
+    }
 }
+
