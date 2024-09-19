@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wwog5s5m2skh" path="res://Scenes/Objects/Power Up/power_up.tscn" id="3_ve5bs"]
 [ext_resource type="PackedScene" uid="uid://cmm6k12urr0lw" path="res://Scenes/Interface/user_interface.tscn" id="4_lolyb"]
 [ext_resource type="PackedScene" uid="uid://cvnb6kqetgmma" path="res://Scenes/Characters/Enemy/basic_enemy_3.tscn" id="4_nuwbo"]
-[ext_resource type="PackedScene" uid="uid://dxs3v2y4knfty" path="res://Scenes/Objects/Environment/environment.tscn" id="6_1c0g0"]
+[ext_resource type="PackedScene" uid="uid://c1hpygvhe3oj3" path="res://Scenes/Objects/Environment/background.tscn" id="7_e8eib"]
 
 [node name="NormalLevel" type="Node2D"]
 scale = Vector2(1.00596, 1.00647)
@@ -28,9 +28,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.092234, 0.122736, 0.14976, 1)
 
-[node name="Environment" parent="." instance=ExtResource("6_1c0g0")]
-z_index = -1
-metadata/_edit_horizontal_guides_ = [722.0]
+[node name="Background" parent="." instance=ExtResource("7_e8eib")]
+scale = Vector2(1, 1)
 
 [node name="EnemySpawn" type="Node2D" parent="."]
 

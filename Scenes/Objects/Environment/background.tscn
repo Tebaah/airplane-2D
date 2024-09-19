@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1hpygvhe3oj3"]
+
+[ext_resource type="Texture2D" uid="uid://bebxr2ug1j3x7" path="res://Assets/Sprites/star_medium.png" id="1_cgboo"]
+[ext_resource type="Texture2D" uid="uid://h2i55f47lxkh" path="res://Assets/Sprites/star_small.png" id="2_m6gq5"]
+[ext_resource type="Texture2D" uid="uid://bd0knse6ip7m0" path="res://Assets/Sprites/star_tiny.png" id="3_s08ok"]
+[ext_resource type="Texture2D" uid="uid://cxihp1uok5or2" path="res://Assets/Sprites/star_large.png" id="4_cyv8x"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+modulate = Color(0.125945, 0.159067, 0.192184, 1)
+repeat_size = Vector2(0, 720)
+autoscroll = Vector2(0, 20)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+texture_filter = 1
+position = Vector2(383, 42)
+texture = ExtResource("3_s08ok")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(299, 635)
+texture = ExtResource("3_s08ok")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(395, 324)
+texture = ExtResource("3_s08ok")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D3"]
+position = Vector2(175, 357)
+texture = ExtResource("3_s08ok")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+modulate = Color(0.175815, 0.217605, 0.259399, 1)
+repeat_size = Vector2(0, 720)
+autoscroll = Vector2(0, 35)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(210, 64)
+texture = ExtResource("2_m6gq5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(86, 260)
+texture = ExtResource("2_m6gq5")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(296, 465)
+texture = ExtResource("2_m6gq5")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D2"]
+position = Vector2(150, 622)
+texture = ExtResource("2_m6gq5")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+modulate = Color(0.160173, 0.199307, 0.238452, 1)
+repeat_size = Vector2(0, 720)
+autoscroll = Vector2(0, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(274, 241)
+texture = ExtResource("1_cgboo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(97, 128)
+texture = ExtResource("1_cgboo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(398, 529)
+texture = ExtResource("1_cgboo")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(97, 457)
+texture = ExtResource("1_cgboo")
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+modulate = Color(0.548963, 0.548963, 0.548963, 1)
+repeat_size = Vector2(0, 1440)
+autoscroll = Vector2(0, 75)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D4"]
+position = Vector2(338, -570)
+texture = ExtResource("4_cyv8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
+position = Vector2(146, -207)
+scale = Vector2(1, 1)
+texture = ExtResource("4_cyv8x")
