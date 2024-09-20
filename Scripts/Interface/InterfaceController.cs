@@ -16,11 +16,13 @@ public partial class InterfaceController : CanvasLayer
     // metodos
     public override void _Ready()
     {
-        // inicializar variables
-        _global = GetNode<Global>("/root/Global");
+        // inicializacion de varaibles y nodos
         _score = GetNode<Label>("Control/VBoxContainer/HBoxContainer/Score");
         _gameOver = GetNode<Label>("Control/VBoxContainer2/GameOver");
         _background = GetNode<ColorRect>("Control/ColorRect");
+        
+        // inicializacion de variables globales y externas 
+        _global = GetNode<Global>("/root/Global");
     }
 
     public override void _Process(double delta)
