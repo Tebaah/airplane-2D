@@ -1,17 +1,18 @@
 using Godot;
 using System;
 
-public partial class InitialInterface : CanvasLayer
+public partial class MenuInterface : GraphicalInterface
 {
     // variables
     private Label _message;
     private AudioStreamPlayer _audio;
+    private Global _global;
 
     // medotos
     public override void _Ready()
     {
-        _message = GetNode<Label>("Control/MessageContainer/Message");
-        _audio = GetNode<AudioStreamPlayer>("Control/ButtonContainer/AudioButton");
+        _message = GetNode<Label>("Container/MessageContainer/Mesagge");
+        _audio = GetNode<AudioStreamPlayer>("Container/ButtonContainer/StartAudio");
     }
     public override void _Process(double delta)
     {
@@ -26,7 +27,7 @@ public partial class InitialInterface : CanvasLayer
 
     public async void MeessageOnTheScreen()
     {
-        await ToSignal(GetTree().CreateTimer(2), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.75), "timeout");
         _message.VisibleRatio += 0.05f;
     }
 }

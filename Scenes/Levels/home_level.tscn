@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c03xu1guyxwp7"]
+
+[ext_resource type="PackedScene" uid="uid://dtrrglxq3udtx" path="res://Scenes/Interface/home_interface.tscn" id="1_unfp1"]
+
+[node name="HomeLevel" type="Node2D"]
+
+[node name="HomeInterface" parent="." instance=ExtResource("1_unfp1")]
