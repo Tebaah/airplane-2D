@@ -25,7 +25,6 @@ public partial class Global : Node2D
     {
         // inicializacion de variables
         LoadScore();
-        GD.Print(rankingPlayer, rankingScore);
     }
     public void SaveScore()
     {

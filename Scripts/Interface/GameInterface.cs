@@ -31,7 +31,7 @@ public partial class GameInterface : GraphicalInterface
 
         // inicializacion de variables globales y externas 
         _global = GetNode<Global>("/root/Global");
-        _lastScore.Text = $"Last Score: {_global.rankingPlayer} - {_global.rankingScore}";
+        _lastScore.Text = $"Last Score: {_global.rankingPlayer} {_global.rankingScore}";
     }
 
     public override void _Process(double delta)
