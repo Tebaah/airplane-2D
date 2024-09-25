@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://bendv30yvbt7p"]
+
+[ext_resource type="PackedScene" uid="uid://cuo6ggs3pkea3" path="res://Scenes/Interface/graphical_interface.tscn" id="1_p4orf"]
+[ext_resource type="Script" path="res://Scripts/Interface/GameInterface.cs" id="2_crl6j"]
+
+[node name="GameInterface" instance=ExtResource("1_p4orf")]
+script = ExtResource("2_crl6j")
+
+[node name="BackgroundColor" parent="Container" index="0"]
+visible = false
+
+[node name="TopContainer" type="VBoxContainer" parent="Container" index="1"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="InformationContainer" type="HBoxContainer" parent="Container/TopContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Score" type="Label" parent="Container/TopContainer/InformationContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_alignment = 1
+
+[node name="Ranking" type="Label" parent="Container/TopContainer/InformationContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_alignment = 1
+
+[node name="MiddleContainer" type="VBoxContainer" parent="Container" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="Container/MiddleContainer" index="0"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.665604, 3.60981e-08, 6.257e-07, 1)
+theme_override_font_sizes/font_size = 44
+text = "GAME OVER"
+
+[node name="MiddleContainerName" type="VBoxContainer" parent="Container" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -131.0
+offset_right = 159.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextField" type="LineEdit" parent="Container/MiddleContainerName" index="0"]
+visible = false
+layout_mode = 2
+placeholder_text = "insert your name for save the score"
+alignment = 1
+
+[node name="BottomContainer" type="VBoxContainer" parent="Container" index="4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -309.0
+offset_right = 37.5
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Container/BottomContainer" index="0"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="Container/BottomContainer/ButtonsContainer" index="0"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RESTART"
+
+[node name="SaveScore" type="Button" parent="Container/BottomContainer/ButtonsContainer" index="1"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SAVE SCORE"
+
+[connection signal="pressed" from="Container/BottomContainer/ButtonsContainer/RestartButton" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="Container/BottomContainer/ButtonsContainer/SaveScore" to="." method="OnSaveScorePressed"]

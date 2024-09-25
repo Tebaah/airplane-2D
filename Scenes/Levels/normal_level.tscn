@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuso6pygpfg7r"]
+[gd_scene load_steps=10 format=3 uid="uid://cuso6pygpfg7r"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/LevelManager.cs" id="1_hwpqf"]
 [ext_resource type="PackedScene" uid="uid://or3dutktyofm" path="res://Scenes/Characters/Enemy/basic_enemy.tscn" id="2_10412"]
 [ext_resource type="PackedScene" uid="uid://c513x5kc2bvfi" path="res://Scenes/Characters/Player/player.tscn" id="3_50l8i"]
 [ext_resource type="PackedScene" uid="uid://ckhx073xao1q1" path="res://Scenes/Characters/Enemy/basic_enemy_2.tscn" id="3_ib12s"]
 [ext_resource type="PackedScene" uid="uid://wwog5s5m2skh" path="res://Scenes/Objects/Power Up/power_up.tscn" id="3_ve5bs"]
-[ext_resource type="PackedScene" uid="uid://cmm6k12urr0lw" path="res://Scenes/Interface/user_interface.tscn" id="4_lolyb"]
+[ext_resource type="PackedScene" uid="uid://bendv30yvbt7p" path="res://Scenes/Interface/game_interface.tscn" id="4_lolyb"]
 [ext_resource type="PackedScene" uid="uid://cvnb6kqetgmma" path="res://Scenes/Characters/Enemy/basic_enemy_3.tscn" id="4_nuwbo"]
 [ext_resource type="PackedScene" uid="uid://c1hpygvhe3oj3" path="res://Scenes/Objects/Environment/background.tscn" id="7_e8eib"]
+[ext_resource type="AudioStream" uid="uid://cf84qshjndaxw" path="res://Assets/Sounds/Music/meet-the-princess.wav" id="9_ksmhg"]
 
 [node name="NormalLevel" type="Node2D"]
 scale = Vector2(1.00596, 1.00647)
@@ -29,7 +30,6 @@ grow_vertical = 2
 color = Color(0.092234, 0.122736, 0.14976, 1)
 
 [node name="Background" parent="." instance=ExtResource("7_e8eib")]
-scale = Vector2(1, 1)
 
 [node name="EnemySpawn" type="Node2D" parent="."]
 
@@ -44,4 +44,9 @@ position = Vector2(242, 653)
 
 [node name="Marker2D" type="Marker2D" parent="PlayerSpawn"]
 
-[node name="UserInterface" parent="." instance=ExtResource("4_lolyb")]
+[node name="GameInterface" parent="." instance=ExtResource("4_lolyb")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ksmhg")
+autoplay = true
+bus = &"Music"

@@ -35,7 +35,6 @@ public partial class LevelManager : Node2D
 
         SpawnPlayer();
         GameStarter();
-
     }
 
     public override void _Process(double delta)
@@ -105,7 +104,7 @@ public partial class LevelManager : Node2D
 
     private async void GameStarter()
     {
-        await ToSignal(GetTree().CreateTimer(5), "timeout");
+        await ToSignal(GetTree().CreateTimer(2), "timeout");
         _global.isPlaying = true;
     }
 

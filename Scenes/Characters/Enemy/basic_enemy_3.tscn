@@ -37,3 +37,6 @@ shape = SubResource("CapsuleShape2D_632fk")
 [node name="AnimatedSprite2D" parent="." index="1"]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_nwrpy")
+
+[node name="AudioStreamPlayer" parent="." index="3"]
+bus = &"Effects"

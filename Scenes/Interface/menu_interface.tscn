@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://lhq4v56g4ady"]
+
+[ext_resource type="PackedScene" uid="uid://cuo6ggs3pkea3" path="res://Scenes/Interface/graphical_interface.tscn" id="1_f3q0d"]
+[ext_resource type="Script" path="res://Scripts/Interface/MenuInterface.cs" id="2_wo4q0"]
+[ext_resource type="AudioStream" uid="uid://bd2jrhc0khvly" path="res://Assets/Sounds/Effects/fx/alien-talk-1.wav" id="3_u0fq7"]
+[ext_resource type="AudioStream" uid="uid://bvd4nh2ahffxn" path="res://Assets/Sounds/Music/loading.wav" id="4_op3u2"]
+
+[node name="MenuInterface" instance=ExtResource("1_f3q0d")]
+script = ExtResource("2_wo4q0")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Container" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Container/ButtonContainer" index="0"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "START"
+
+[node name="StartAudio" type="AudioStreamPlayer" parent="Container/ButtonContainer" index="1"]
+stream = ExtResource("3_u0fq7")
+bus = &"EffectInterface"
+
+[node name="MessageContainer" type="VBoxContainer" parent="Container" index="2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.5
+offset_top = 200.0
+offset_right = 145.5
+offset_bottom = 223.0
+grow_horizontal = 2
+
+[node name="Mesagge" type="Label" parent="Container/MessageContainer" index="0"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "Destruye a todos los aliens enemigos "
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="MusicMenu" type="AudioStreamPlayer" parent="." index="1"]
+stream = ExtResource("4_op3u2")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Container/ButtonContainer/StartButton" to="." method="OnStartButtonPressed"]
