@@ -3,13 +3,13 @@ using System;
 
 public partial class PlayerController : CharacterBody2D
 {
-    // variables
+    #region  variables
 
-    // movimiento
+    // comportamiento del jugador
     [Export] public float speed;
     private float _backlink = 5f;
 
-    // ataque
+    // ataque del jugador
     [Export] public PackedScene[] bullet;
     private Marker2D _spawnBullets;
     private bool _canShoot = true;
@@ -17,13 +17,18 @@ public partial class PlayerController : CharacterBody2D
 
     // sonidos y efectos
     private AudioStreamPlayer _audio;
+
     // globales
     public Global global;
 
-    // metodos
+    #endregion
+
+    
+    #region metodos godot
+
     public override void _Ready()
     {
-        // insicalizar variables
+        // inicializa las variables
         _spawnBullets = GetNode<Marker2D>("Weapons/Marker2D");
         global = GetNode<Global>("/root/Global");
         _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
@@ -32,7 +37,10 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _Process(double delta)
     {
-        Attack();
+        if(Input.IsActionJustPressed("attack") && _canShoot)
+        {
+            Attack();
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -41,12 +49,17 @@ public partial class PlayerController : CharacterBody2D
         MoveAndSlide();
     }
 
+    #endregion
+
+
+    #region metodos
+
     private void Movement(double delta)
     {
-        // obtenemos la direccion del input
+        // obtiene la direccion del input
         Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
-        
-        // almacenamos en velocity la direccion normalizada por la velocidad
+
+        // almacena la velocidad del jugador
         Velocity = inputDirection.Normalized() * speed * (float)delta;
 
         LimitOfMovement();
@@ -54,6 +67,7 @@ public partial class PlayerController : CharacterBody2D
     
     private void LimitOfMovement()
     {
+        // limita el movimiento del jugador
         if(Position.X < 2)
         {
             Position = new Vector2(Position.X + _backlink, Position.Y);
@@ -75,22 +89,21 @@ public partial class PlayerController : CharacterBody2D
 
     private async void Attack()
     {
-        // 
-        if (Input.IsActionJustPressed("attack") && _canShoot) 
-        {
-            _canShoot = false;
-            Shoot();
+        // modifica el estado para no disparar seguido
+        // posterior realiza el disparo
+        _canShoot = false;
+        Shoot();
 
-            await ToSignal(GetTree().CreateTimer(0.20f), "timeout");
-            _canShoot = true;
-        }
+        // espera 0.20 segundos para cambiar el estado de disparo
+        await ToSignal(GetTree().CreateTimer(0.20f), "timeout");
+        _canShoot = true;
     }
 
     private void Shoot()
     {
         switch (_levelAttack)
         {
-            // instanciamos la bala dependiendo del nivel de ataque
+            // instancia el disparo segun el nivel de ataque
             case 1:
                 Bullet newBullet1 = bullet[0].Instantiate() as Bullet;
                 newBullet1.Position = _spawnBullets.GlobalPosition;
@@ -112,40 +125,47 @@ public partial class PlayerController : CharacterBody2D
         }
     }
 
-    public void LevelUpAttack()
+    public void AttackLevelManager()
     {
-        // modificamos de nivel el ataque
-        _levelAttack++;
+        // limita el nivel de ataque
         if(_levelAttack > 3)
         {
             _levelAttack = 3;
         }
+
+        // activa la disminucion del nivel de ataque
         if(_levelAttack == 3)
         {
-            LevelDownAttack();
+            DecreaseAttackLevel();
         }
     }
 
-    public async void LevelDownAttack()
+    public void IncreaseAttackLevel()
     {
-        // bajamos de nivel el ataque despues de 30 segundos
+        _levelAttack++;
+    }
+
+    public async void DecreaseAttackLevel()
+    {
+        // disminuye el nivel del ataque despues de 30 segundos
         await ToSignal(GetTree().CreateTimer(30), "timeout");
         _levelAttack = 2;
     }
 
     public void DetectPowerUp(Area2D body)
     {
-        // al detectar un power up, subimos de nivel el ataque
+        // detecta el power up y aumenta el nivel de ataque
         if(body.IsInGroup("PowerUp"))
         {
-            LevelUpAttack();
+            IncreaseAttackLevel();
+            AttackLevelManager();
             body.QueueFree();
         }
     }
 
     public void DetectDamage(Area2D body)
     {
-        // al detectar un enemigo o una bala, bajamos la vida
+        // detecta el daño y disminuye la vida
         if(body.IsInGroup("Enemy") || body.IsInGroup("BulletEnemy"))
         {
             global.life--;
@@ -155,4 +175,6 @@ public partial class PlayerController : CharacterBody2D
             }
         }
     }
+
+    #endregion
 }

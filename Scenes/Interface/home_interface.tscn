@@ -4,6 +4,22 @@
 [ext_resource type="Script" path="res://Scripts/Interface/HomeInterface.cs" id="2_jnwrh"]
 [ext_resource type="Texture2D" uid="uid://chlods5upg33j" path="res://icon.svg" id="3_yv5lr"]
 
+[sub_resource type="Animation" id="Animation_ewaj8"]
+length = 0.001
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LogoGodot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_4l8hs"]
 resource_name = "default"
 step = 0.125
@@ -18,21 +34,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 1.57079, 3.14159, 4.71238, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_ewaj8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LogoGodot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_di85x"]
@@ -75,7 +76,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LogoGodot" type="Sprite2D" parent="Container/VBoxContainer" index="2"]
-position = Vector2(187, 246.5)
+position = Vector2(186, 246.5)
 texture = ExtResource("3_yv5lr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Container/VBoxContainer" index="3"]
