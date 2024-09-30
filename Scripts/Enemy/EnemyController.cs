@@ -3,52 +3,61 @@ using System;
 
 public partial class EnemyController : Area2D
 {
-    // variables
+    #region variables
 
-    // nivel que establece las caracteristicas del enemigo
+    // comportamiento 
     public int level;
-
-    // comportamiento del enemigo
-    private float _speed;
     private int _life;
     private int _score;
+
+    // movimiento 
+    private float _speed;
     private bool _changeDirection = false;
     private Vector2 _direction;
     private CollisionShape2D _collisionShape;
 
-    // ataque del enemigo
+    // ataque 
     [Export] public PackedScene bulletEnemy;
     private Marker2D _marker;
     private bool _canShoot = true;
     private CharacterBody2D _target;
 
-    // effects TODO: implementar efectos de sonido y animaciones
+    // animaciones y sonidos
     private AudioStreamPlayer _audio;
     private AnimatedSprite2D _animatedSprite;
 
-    // global variables
+    // global
     private Global _global;
 
-    // metodos
+    #endregion
+
+    #region metodos godot
     public override void _Ready()
     {
-        // inicializacion de variables y nodos
+        // inicializa las variables y nodos
         _marker = GetNode<Marker2D>("Marker2D");
         _audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         
-        // inicializacion de variables globales y externas
+        // inicializa las variables globales y externas
         _global = GetNode<Global>("/root/Global");
         _target = GetParent().GetNode<CharacterBody2D>("/root/NormalLevel/Player");
 
     }
 
+    #endregion
+
+    #region metodos
+
     public void SetLevel()
     {
         Random randomLevel = new();
         level = randomLevel.Next(1, 4);
+    }
 
+    public void SetAttributes()
+    {
         Random randomAttributes = new();
 
         // establecera las caracteristicas del enemigo segun el nivel
@@ -80,20 +89,19 @@ public partial class EnemyController : Area2D
 
     public void Movement(double delta)
     {
-        // en el eje Y en el pixel 300 cambiara de direccion
+        // valida si se encuentra en el rango que puede cambiar de direccion 
+        // de lo contrario seguira su camino
         if(Position.Y > 300 && _changeDirection == false)
         {
             if(Position.X < 80 || Position.X > 400)
             {
-                // tomara la direccion del jugador
+                // almacena la direccion hacia el jugador
                 LookAt(_target.Position);
                 _direction = Position.DirectionTo(_target.Position);
                 _changeDirection = true;
-
             }
-
         }
-        // si puede cambiar de direccion, se movera en la direccion del jugador, 
+        // cambia direccion hacia el jugador 
         // de lo contrario seguira su camino
         if(_changeDirection == true)
         {
@@ -104,10 +112,11 @@ public partial class EnemyController : Area2D
             Position += new Vector2(0, _speed * (float)delta);
         }
 
+        CheckPosition();
 
     }
 
-    public void OnAreaEntered(Area2D area)
+    public void CheckCollisions(Area2D area)
     {
         if(area.IsInGroup("Bullet") && _life > 0)
         {
@@ -119,18 +128,14 @@ public partial class EnemyController : Area2D
         }
     }
 
-    public async void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _life -= damage;
 
         if(_life <= 0)
         {
-            _global.score += _score;
-            _audio.Play();
-            _animatedSprite.Animation = "destroy";
-
-            await _audio.ToSignal(_audio, "finished");
-            QueueFree();
+            ChangeScore();
+            ActivateEffects();
         }
     }
 
@@ -148,14 +153,34 @@ public partial class EnemyController : Area2D
         }
     }
 
-    public void Destroy() 
+    // TODO: revisar funcionamiento de las siguientes funciones
+    public void CheckPosition()
     {
         if(Position.Y > GetViewportRect().Size.Y || _global.life <= 0)
         {
-            QueueFree();
+            Destroy();
         }
-
-
     }
+
+    public async void ActivateEffects()
+    {
+        _audio.Play();
+        _animatedSprite.Animation = "destroy";
+
+        await _audio.ToSignal(_audio, "finished");
+        Destroy();
+    }
+
+    public void ChangeScore()
+    {
+        _global.score += _score;
+    }
+
+    public void Destroy() 
+    {
+        QueueFree();
+    }
+
+    #endregion
 }
 

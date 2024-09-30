@@ -47,3 +47,5 @@ animation = &"destroy"
 
 [node name="AudioStreamPlayer" parent="." index="4"]
 bus = &"Effects"
+
+[connection signal="area_entered" from="." to="." method="CheckCollisions"]
