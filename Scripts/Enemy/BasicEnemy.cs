@@ -3,18 +3,19 @@ using System;
 
 public partial class BasicEnemy : EnemyController
 {
+    #region metodos godot
     public override void _Ready()
     {
         base._Ready();
         SetLevel();
+        SetAttributes();
     }
 
     public override void _PhysicsProcess(double delta)
     {
         Movement(delta);
         Shoot();
-        Destroy();
     }
     
-
+    #endregion
 }
