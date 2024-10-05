@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bssvi1reu0j1t"]
+
+[ext_resource type="Texture2D" uid="uid://digyljegakw46" path="res://Assets/Sprites/enemy_D.png" id="1_blh7d"]
+[ext_resource type="PackedScene" uid="uid://bj32abq1ho8qy" path="res://Scenes/Characters/Enemy/enemy_base.tscn" id="1_e3y3c"]
+[ext_resource type="Script" path="res://Scripts/Enemy/IntermediateEnemy.cs" id="2_ai3va"]
+[ext_resource type="PackedScene" uid="uid://ddfqb1ons5drf" path="res://Scenes/Characters/Enemy/bullet_double.tscn" id="3_dtnax"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x4jy3"]
+radius = 22.0
+height = 54.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ahiul"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"destroy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_blh7d")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="IntermediateEnemy" instance=ExtResource("1_e3y3c")]
+rotation = 1.5708
+script = ExtResource("2_ai3va")
+bulletEnemy = ExtResource("3_dtnax")
+
+[node name="CollisionShape2D" parent="." index="0"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_x4jy3")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_ahiul")
+
+[node name="Marker2D" parent="." index="2"]
+position = Vector2(32, -1.39876e-06)
