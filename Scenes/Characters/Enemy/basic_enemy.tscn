@@ -30,6 +30,7 @@ animations = [{
 [node name="BasicEnemy" instance=ExtResource("1_8ygwv")]
 rotation = 1.5708
 script = ExtResource("2_1l5ag")
+enemyType = PackedStringArray("basic")
 bulletEnemy = ExtResource("3_t1a16")
 
 [node name="CollisionShape2D" parent="." index="0"]

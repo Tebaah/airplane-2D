@@ -14,7 +14,8 @@
 [node name="NormalLevel" type="Node2D"]
 scale = Vector2(1.00596, 1.00647)
 script = ExtResource("1_hwpqf")
-enemy = Array[PackedScene]([ExtResource("2_10412"), ExtResource("3_ib12s"), ExtResource("4_nuwbo"), ExtResource("5_18tmu")])
+enemy = Array[PackedScene]([ExtResource("2_10412"), ExtResource("3_ib12s"), ExtResource("4_nuwbo")])
+specialEnemy = Array[PackedScene]([ExtResource("5_18tmu")])
 powerup = ExtResource("3_ve5bs")
 player = ExtResource("3_50l8i")
 metadata/_edit_vertical_guides_ = [80.0, 400.0]
@@ -35,6 +36,10 @@ color = Color(0.092234, 0.122736, 0.14976, 1)
 [node name="EnemySpawn" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="EnemySpawn"]
+
+[node name="SpecialEnemySpawn" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpecialEnemySpawn"]
 
 [node name="PowerUpSpawn" type="Node2D" parent="."]
 
