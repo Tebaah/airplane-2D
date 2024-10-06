@@ -40,5 +40,3 @@ sprite_frames = SubResource("SpriteFrames_nwrpy")
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 bus = &"Effects"
-
-[connection signal="area_entered" from="." to="." method="CheckCollisions"]

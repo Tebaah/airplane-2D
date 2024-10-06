@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuso6pygpfg7r"]
+[gd_scene load_steps=11 format=3 uid="uid://cuso6pygpfg7r"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/LevelManager.cs" id="1_hwpqf"]
 [ext_resource type="PackedScene" uid="uid://or3dutktyofm" path="res://Scenes/Characters/Enemy/basic_enemy.tscn" id="2_10412"]
@@ -7,13 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://wwog5s5m2skh" path="res://Scenes/Objects/Power Up/power_up.tscn" id="3_ve5bs"]
 [ext_resource type="PackedScene" uid="uid://bendv30yvbt7p" path="res://Scenes/Interface/game_interface.tscn" id="4_lolyb"]
 [ext_resource type="PackedScene" uid="uid://cvnb6kqetgmma" path="res://Scenes/Characters/Enemy/basic_enemy_3.tscn" id="4_nuwbo"]
+[ext_resource type="PackedScene" uid="uid://bssvi1reu0j1t" path="res://Scenes/Characters/Enemy/intermediate_enemy.tscn" id="5_18tmu"]
 [ext_resource type="PackedScene" uid="uid://c1hpygvhe3oj3" path="res://Scenes/Objects/Environment/background.tscn" id="7_e8eib"]
 [ext_resource type="AudioStream" uid="uid://cf84qshjndaxw" path="res://Assets/Sounds/Music/meet-the-princess.wav" id="9_ksmhg"]
 
 [node name="NormalLevel" type="Node2D"]
 scale = Vector2(1.00596, 1.00647)
 script = ExtResource("1_hwpqf")
-enemy = Array[PackedScene]([ExtResource("2_10412"), ExtResource("3_ib12s"), ExtResource("4_nuwbo")])
+enemy = Array[PackedScene]([ExtResource("2_10412"), ExtResource("3_ib12s"), ExtResource("4_nuwbo"), ExtResource("5_18tmu")])
 powerup = ExtResource("3_ve5bs")
 player = ExtResource("3_50l8i")
 metadata/_edit_vertical_guides_ = [80.0, 400.0]

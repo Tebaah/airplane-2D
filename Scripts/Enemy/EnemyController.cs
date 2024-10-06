@@ -15,6 +15,8 @@ public partial class EnemyController : Area2D
     private bool _changeDirection = false;
     private Vector2 _direction;
     private CollisionShape2D _collisionShape;
+    private int _initialPosition = 20;
+    private int _finalPosition = 460;
 
     // ataque 
     [Export] public PackedScene bulletEnemy;
@@ -114,6 +116,39 @@ public partial class EnemyController : Area2D
 
         CheckPosition();
 
+    }
+
+    public void Movement(double delta, int limit)
+    {
+        // valida si se encuentra en el rango que puede cambiar de direccion y avanza hasta el limite
+        if(Position.Y < limit)
+        {
+            Position += new Vector2(0, _speed * (float)delta);
+        }
+        // valida si se encuentra en el rango que puede cambiar de direccion y se mueve de un lado a otro
+        else if(Position.Y >= limit)
+        {
+            if(Position.X > _initialPosition && !_changeDirection)
+            {
+                Position -= new Vector2(_speed * (float)delta, 0);
+                if(Position.X <= _initialPosition)
+                {
+                    _changeDirection = true;
+                }
+            }
+            else if(Position.X < _finalPosition && _changeDirection)
+            {
+                Position += new Vector2(_speed * (float)delta, 0);
+                if(Position.X >= _finalPosition)
+                {
+                    _changeDirection = false;
+                }
+            }
+
+        }
+        
+        CheckPosition();
+ 
     }
 
     public void CheckCollisions(Area2D area)

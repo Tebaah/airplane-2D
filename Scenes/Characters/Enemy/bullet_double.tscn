@@ -31,6 +31,8 @@ texture = ExtResource("2_u31q5")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-14, -2.08616e-07)
-rotation = -3.09015
+rotation = -3.14159
 scale = Vector2(0.066, 0.078125)
 texture = ExtResource("2_u31q5")
+
+[connection signal="body_entered" from="." to="." method="OnPlayerEntered"]

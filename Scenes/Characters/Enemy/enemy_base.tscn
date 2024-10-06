@@ -33,4 +33,4 @@ autoplay = "move"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_c0k7m")
 
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_entered" from="." to="." method="CheckCollisions"]
