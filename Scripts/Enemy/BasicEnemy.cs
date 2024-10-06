@@ -8,7 +8,7 @@ public partial class BasicEnemy : EnemyController
     {
         base._Ready();
         SetLevel();
-        SetAttributes();
+        SetAttributes(EnemyType.basic);
     }
 
     public override void _PhysicsProcess(double delta)

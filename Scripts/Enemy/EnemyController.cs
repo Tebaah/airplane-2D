@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Reflection;
 
 public partial class EnemyController : Area2D
 {
@@ -9,6 +11,7 @@ public partial class EnemyController : Area2D
     public int level;
     private int _life;
     private int _score;
+    public enum EnemyType { basic, special, boss }
 
     // movimiento 
     private float _speed;
@@ -58,34 +61,64 @@ public partial class EnemyController : Area2D
         level = randomLevel.Next(1, 4);
     }
 
-    public void SetAttributes()
+    public void SetAttributes(EnemyType type)
     {
         Random randomAttributes = new();
-
-        // establecera las caracteristicas del enemigo segun el nivel
-        switch(level)
+        
+        // establece las caracteristicas del enemigo segun el nivel
+        if(type == EnemyType.basic)
         {
-            case 1:
-                _life = randomAttributes.Next(1, 2);
-                _speed = randomAttributes.Next(75, 100);
-                _score = randomAttributes.Next(1, 2);
-                _animatedSprite.Animation = "move";
-                break;
-            case 2:
-                _life = randomAttributes.Next(2, 3);
-                _speed = randomAttributes.Next(100, 125);
-                _score = randomAttributes.Next(3, 5);
-                _animatedSprite.Animation = "move";
-                break;
-            case 3:
-                _life = randomAttributes.Next(3, 4);
-                _speed = randomAttributes.Next(125, 150);
-                _score = randomAttributes.Next(5, 10);
-                _animatedSprite.Animation = "move";
-                break;
-            default:
-                _life = 1;
-                break;
+            switch(level)
+            {
+                case 1:
+                    _life = randomAttributes.Next(1, 2);
+                    _speed = randomAttributes.Next(75, 100);
+                    _score = randomAttributes.Next(1, 2);
+                    _animatedSprite.Animation = "move";
+                    break;
+                case 2:
+                    _life = randomAttributes.Next(2, 3);
+                    _speed = randomAttributes.Next(100, 125);
+                    _score = randomAttributes.Next(3, 5);
+                    _animatedSprite.Animation = "move";
+                    break;
+                case 3:
+                    _life = randomAttributes.Next(3, 4);
+                    _speed = randomAttributes.Next(125, 150);
+                    _score = randomAttributes.Next(5, 10);
+                    _animatedSprite.Animation = "move";
+                    break;
+                default:
+                    _life = 1;
+                    break;
+            }
+        }
+        else if(type == EnemyType.special)
+        {
+            switch(level)
+            {
+                case 1:
+                    _life = randomAttributes.Next(5, 10);
+                    _speed = randomAttributes.Next(150, 225);
+                    _score = randomAttributes.Next(11, 15);
+                    _animatedSprite.Animation = "move";
+                    break;
+                case 2:
+                    _life = randomAttributes.Next(10, 15);
+                    _speed = randomAttributes.Next(150, 225);
+                    _score = randomAttributes.Next(15, 20);
+                    _animatedSprite.Animation = "move";
+                    break;
+                case 3:
+                    _life = randomAttributes.Next(15, 20);
+                    _speed = randomAttributes.Next(150, 225);
+                    _score = randomAttributes.Next(20,25);
+                    _animatedSprite.Animation = "move";
+                    break;
+                default:
+                    _life = 1;
+                    break;
+            }
         }
     }
 

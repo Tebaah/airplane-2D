@@ -12,7 +12,7 @@ public partial class IntermediateEnemy : EnemyController
     {
         base._Ready();
         SetLevel();
-        SetAttributes();   
+        SetAttributes(EnemyType.special);
     }
 
     public override void _PhysicsProcess(double delta)
